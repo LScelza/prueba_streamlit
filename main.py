@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = FastAPI(title='Proyecto Integrador I Hecho por Michael Martinez')
 # Cargar el dataset
-df_recom = pd.read_parquet('../Dataset/recomendaciones3.parquet')
+df_recom = pd.read_parquet('../Dataset/recomendacion3.parquet')
 # Preprocesamiento de los géneros para generar la matriz TF-IDF
 vectorizer = TfidfVectorizer()
 tfidf_matrix = vectorizer.fit_transform(df_recom.groupby('item_id')['genres'].apply(lambda x: ' '.join(x)))
