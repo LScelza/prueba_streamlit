@@ -1,6 +1,7 @@
-﻿fastapi==0.111.0
-Jinja2==3.1.4
-pandas==2.2.2
-scikit-learn==1.2.2
-uvicorn==0.29.0
-pyarrow==16.1.0
+﻿fastapi 
+numpy
+pandas
+uvicorn
+pyarrow
+fastparquet
+scikit-learn
