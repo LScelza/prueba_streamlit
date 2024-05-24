@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = FastAPI(title='Proyecto Integrador I Hecho por Michael Martinez')
 # Cargar el dataset
-df_recom = pd.read_parquet(r'https://github.com/LScelza/prueba_streamlit/Machine-Learning-Operations-MLOps-/blob/f079b6b85022872dbe96419294620b4f8d9aca14/Dataset/recomendacion3.parquet?raw=True')
+df_recom = pd.read_parquet('../Dataset/recomendaciones3.parquet')
 # Preprocesamiento de los géneros para generar la matriz TF-IDF
 vectorizer = TfidfVectorizer()
 tfidf_matrix = vectorizer.fit_transform(df_recom.groupby('item_id')['genres'].apply(lambda x: ' '.join(x)))
@@ -32,8 +32,8 @@ async def recomendacion_juego(item_id : float = Query(default=22330.0)):
     juegos_recomendados = df_recom['title'].iloc[game_indices].tolist() 
     return juegos_recomendados
 
-if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+# if __name__ == "__main__":
+#     port = int(os.environ.get('PORT', 8000))
+#     uvicorn.run(app, host="0.0.0.0", port=port)
 
 
