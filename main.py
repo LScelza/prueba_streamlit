@@ -19,20 +19,20 @@ async def recomendacion_juego(item_id : float = Query(default=22330.0)):
     try:
         # Obtener el índice del juego en el DataFrame
         idx = df_recom[df_recom['item_id'] == item_id].index[0]
-        print('Existe')
+        # print('Existe')
     except IndexError:
-        print('No existe')
+        # print('No existe')
         # Manejar el caso donde no se encuentra el ID del juego
-        # raise HTTPException(status_code=404, detail="Item ID no encontrado.")
+        raise HTTPException(status_code=404, detail="Item ID no encontrado.")
     # Calcular la similitud de coseno entre el juego dado y todos los juegos
-    # sim_scores = list(enumerate(cosine_sim[idx]))
+    sim_scores = list(enumerate(cosine_sim[idx]))
     # Ordenar los juegos por su similitud de coseno
-    # sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:6]
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:6]
     # Obtener los índices de los juegos recomendados
-    # game_indices = [i[0] for i in sim_scores]
+    game_indices = [i[0] for i in sim_scores]
     # Obtener los títulos de los juegos recomendados
-    # juegos_recomendados = df_recom['title'].iloc[game_indices].tolist() 
-    # return juegos_recomendados
+    juegos_recomendados = df_recom['title'].iloc[game_indices].tolist() 
+    return juegos_recomendados
 
 # if __name__ == "__main__":
 #     port = int(os.environ.get('PORT', 8000))
